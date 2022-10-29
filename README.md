@@ -2,7 +2,7 @@
 
 A Cron expression UI component based on Vue3 and Ant Design Vue.
 
-English | [简体中文](./README-zh_CN.md)
+English | [简体中文](./README.zh_CN.md)
 
 ## Preview
 
