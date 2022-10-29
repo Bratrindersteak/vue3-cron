@@ -28,6 +28,8 @@ export function zerofill(value: number): string {
 }
 
 /**
+ * 转换星期数字为缩写.
+ *
  * @param value - .
  */
 export function weekNumberToLetter(value: string): string {
@@ -35,6 +37,8 @@ export function weekNumberToLetter(value: string): string {
 }
 
 /**
+ * 转换星期缩写为数字.
+ *
  * @param value - .
  */
 export function weekLetterToNumber(value: string): string {
@@ -42,6 +46,7 @@ export function weekLetterToNumber(value: string): string {
 }
 
 /**
+ * 星期字段的 <a-input-number> 组件 formatter 函数.
  *
  * @param value - .
  */
@@ -50,6 +55,7 @@ export function formatterWeek(value: number): string {
 }
 
 /**
+ * 星期字段的 <a-input-number> 组件 parser 函数.
  *
  * @param value - .
  */
