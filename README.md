@@ -4,7 +4,7 @@
 
 ## 预览
 
-![](public\preview.png)
+![](public/preview.png)
 
 ## 支持的语法
 
