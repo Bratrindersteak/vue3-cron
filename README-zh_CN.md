@@ -35,7 +35,7 @@
 ## 安装
 
 ```
-npm install vue3-cron --save
+npm install vue3-cron-antd --save
 ```
 
 ## 使用方法

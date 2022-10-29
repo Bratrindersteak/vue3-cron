@@ -1,5 +1,5 @@
 {
-  "name": "vue3-cron",
+  "name": "vue3-cron-antd",
   "version": "1.0.0",
   "description": "基于 Vue3 和 ant-design-vue 的 Cron 表达式 UI 组件",
   "keywords": [

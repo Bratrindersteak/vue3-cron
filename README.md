@@ -35,7 +35,7 @@ English | [简体中文](./README-zh_CN.md)
 ## Installation
 
 ```
-npm install vue3-cron --save
+npm install vue3-cron-antd --save
 ```
 
 ## Usage
