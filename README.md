@@ -22,7 +22,7 @@ English | [简体中文](./README-zh_CN.md)
 └────────────────────────────── second (0 - 59)
 ```
 
-| Field  | Required | Value range             | Allowed wildcard |
+| Field  | Required | Value range      | Allowed wildcard |
 |--------|----------|------------------|------------------|
 | Second | Yes      | 0-59             | , - * /          |
 | Minute | Yes      | 0-59             | , - * /          |
