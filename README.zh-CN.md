@@ -1,14 +1,14 @@
 # vue3-cron
 
-A Cron expression UI component based on Vue3 and Ant Design Vue.
+基于 `Vue3` 和 `ant-design-vue` 的 Cron 表达式 UI 组件.
 
-English | [简体中文](./README-zh_CN.md)
+[English](./README.md) | 简体中文
 
-## Preview
+## 预览
 
 ![](public/preview.png)
 
-## Supported format
+## 支持的语法
 
 ```
 *    *    *    *    *    *    *
@@ -22,25 +22,25 @@ English | [简体中文](./README-zh_CN.md)
 └────────────────────────────── second (0 - 59)
 ```
 
-| Field  | Required | Value range             | Allowed wildcard |
-|--------|----------|------------------|------------------|
-| Second | Yes      | 0-59             | , - * /          |
-| Minute | Yes      | 0-59             | , - * /          |
-| Hour   | Yes      | 0-23             | , - * /          |
-| Date   | Yes      | 1-31             | , - * / L W      |
-| Month  | Yes      | 1-12             | , - * /          |
-| Week   | Yes      | 0-7 or SUN-SAT   | , - * / L #      |
-| Year   | No       | currentYear-2099 | , - * /          |
+| 项  | 是否必填 | 取值范围 | 支持的通配符 |
+|----|----|----|----|
+| 秒  | 是 | 0-59 | , - * / |
+| 分  | 是 | 0-59 | , - * / |
+| 时  | 是 | 0-23 | , - * / |
+| 日  | 是 | 1-31 | , - * / L W |
+| 月  | 是 | 1-12 | , - * / |
+| 周  | 是 | 0-7 或者 SUN-SAT | , - * / L # |
+| 年  | 否 | 当前年份-2099 | , - * / |
 
-## Installation
+## 安装
 
 ```
 npm install vue3-cron --save
 ```
 
-## Usage
+## 使用方法
 
-### Import
+### 引入
 
 ```typescript
 import { createApp } from 'vue';
@@ -55,7 +55,7 @@ app.use(Vue3Cron);
 app.mount('#app');
 ```
 
-### Use
+### 使用
 
 ```vue
 <template>

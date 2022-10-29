@@ -6,12 +6,13 @@
     "vue3-cron",
     "cron",
     "crontab",
+    "cron-expression",
     "ant-design-vue",
     "antdv",
     "vue",
     "vue3",
     "component",
-    "ui",
+    "ui-component",
     "frontend"
   ],
   "author": "Bratrindersteak",
@@ -42,7 +43,8 @@
   "dependencies": {
     "ant-design-vue": ">=3.2.13",
     "cron-parser": ">=4.6.0",
-    "vue": ">=3.2.41"
+    "vue": ">=3.2.41",
+    "vue-i18n": "^9.2.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
