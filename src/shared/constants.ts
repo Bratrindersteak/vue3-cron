@@ -19,18 +19,26 @@ export const MAX_WEEK = 6;
 export const MIN_YEAR = new Date().getFullYear();
 export const MAX_YEAR = 2099;
 
-export const WEEK_OBJ = {
-    SUN: { value: 'SUN', label: '星期日', index: ['0', '7'] },
-    MON: { value: 'MON', label: '星期一', index: ['1'] },
-    TUE: { value: 'TUE', label: '星期二', index: ['2'] },
-    WED: { value: 'WED', label: '星期三', index: ['3'] },
-    THU: { value: 'THU', label: '星期四', index: ['4'] },
-    FRI: { value: 'FRI', label: '星期五', index: ['5'] },
-    SAT: { value: 'SAT', label: '星期六', index: ['6'] },
-};
-export const WEEKS = Object.values(WEEK_OBJ).map(({ index, label }) => ({ value: parseInt(index[0]), label }));
-export const WEEK_INDEX_REGEXP = new RegExp(WEEKS.map(({ value }) => `(?<!#)${value}`).join('|'), 'g');
-export const WEEK_LETTER_REGEXP = new RegExp(Object.keys(WEEK_OBJ).join('|'), 'g');
+export const SUNDAY = 'sunday';
+export const MONDAY = 'monday';
+export const TUESDAY = 'tuesday';
+export const WEDNESDAY = 'wednesday';
+export const THURSDAY = 'thursday';
+export const FRIDAY = 'friday';
+export const SATURDAY = 'saturday';
+
+export const WEEKS = [
+    { value: SUNDAY, abbr: 'SUN', index: '0' },
+    { value: MONDAY, abbr: 'MON', index: '1' },
+    { value: TUESDAY, abbr: 'TUE', index: '2' },
+    { value: WEDNESDAY, abbr: 'WED', index: '3' },
+    { value: THURSDAY, abbr: 'THU', index: '4' },
+    { value: FRIDAY, abbr: 'FRI', index: '5' },
+    { value: SATURDAY, abbr: 'SAT', index: '6' },
+];
+
+export const WEEK_INDEX_REGEXP = new RegExp(WEEKS.map(({ index }) => `(?<!#)${index}`).join('|'), 'g');
+export const WEEK_LETTER_REGEXP = new RegExp(WEEKS.map(({ abbr }) => abbr).join('|'), 'g');
 
 export const TYPE = {
     EVERY: '*',
@@ -55,13 +63,18 @@ export const WEEK = 'week';
 export const YEAR = 'year';
 
 export const FIELDS = [
-    { value: SECOND, label: '秒', alias: '秒钟', min: MIN_SECOND, max: MAX_SECOND },
-    { value: MINUTE, label: '分', alias: '分钟', min: MIN_MINUTE, max: MAX_MINUTE },
-    { value: HOUR, label: '时', alias: '小时', min: MIN_HOUR, max: MAX_HOUR },
-    { value: DATE, label: '日', alias: '天', min: MIN_DATE, max: MAX_DATE },
-    { value: MONTH, label: '月', alias: '个月', min: MIN_MONTH, max: MAX_MONTH },
-    { value: WEEK, label: '周', alias: '星期', min: MIN_WEEK, max: MAX_WEEK },
-    { value: YEAR, label: '年', alias: '年', min: MIN_YEAR, max: MAX_YEAR },
+    { value: SECOND, min: MIN_SECOND, max: MAX_SECOND },
+    { value: MINUTE, min: MIN_MINUTE, max: MAX_MINUTE },
+    { value: HOUR, min: MIN_HOUR, max: MAX_HOUR },
+    { value: DATE, min: MIN_DATE, max: MAX_DATE },
+    { value: MONTH, min: MIN_MONTH, max: MAX_MONTH },
+    { value: WEEK, min: MIN_WEEK, max: MAX_WEEK },
+    { value: YEAR, min: MIN_YEAR, max: MAX_YEAR },
 ];
 
+export const LOCALE_CN = 'cn';
+export const LOCALE_EN = 'en';
+
 export const DEFAULT_CRON_EXPRESSION = '* * * * * ?';
+export const DEFAULT_LOCALE = LOCALE_CN;
+

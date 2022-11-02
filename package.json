@@ -1,7 +1,7 @@
 {
   "name": "vue3-cron-antd",
-  "version": "1.0.0",
-  "description": "基于 Vue3 和 ant-design-vue 的 Cron 表达式 UI 组件",
+  "version": "1.1.0",
+  "description": "A Cron expression UI component based on Vue3 and Ant Design Vue",
   "keywords": [
     "vue3-cron",
     "cron",
@@ -43,8 +43,7 @@
   "dependencies": {
     "ant-design-vue": ">=3.2.13",
     "cron-parser": ">=4.6.0",
-    "vue": ">=3.2.41",
-    "vue-i18n": "^9.2.2"
+    "vue": ">=3.2.41"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

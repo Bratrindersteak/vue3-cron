@@ -1,6 +1,5 @@
 <template>
     <a-input-number
-        class="input-number"
         v-model:value="value"
         :min="range[0]"
         :max="range[1]"
@@ -23,6 +22,9 @@ export default {
             type: Array,
         },
         fieldValue: String,
+        locale: {
+            type: String,
+        },
     },
     emits: ['update:modelValue', 'change'],
     computed: {
@@ -35,10 +37,10 @@ export default {
             },
         },
         formatter() {
-            return this.fieldValue === WEEK ? formatterWeek : null;
+            return (this.fieldValue === WEEK) ? ($event) => formatterWeek($event, this.locale) : null;
         },
         parser() {
-            return this.fieldValue === WEEK ? parserWeek : null;
+            return (this.fieldValue === WEEK) ? ($event) => parserWeek($event, this.locale) : null;
         },
     },
     methods: {

@@ -1,71 +1,76 @@
 <template>
     <a-radio-group class="radio-group" v-model:value="type">
-        <a-radio :value="TYPE.EMPTY" v-if="isEmpty">不指定</a-radio>
-        <a-radio :value="TYPE.EVERY">每{{ field.alias }}</a-radio>
-        <a-radio :value="TYPE.UNSPECIFIC" v-if="isUnspecific">不指定</a-radio>
+        <a-radio :value="TYPE.EMPTY" v-if="isEmpty">{{ label.empty }}</a-radio>
+        <a-radio :value="TYPE.EVERY">{{ label.every }}</a-radio>
+        <a-radio :value="TYPE.UNSPECIFIC" v-if="isUnspecific">{{ label.unspecific }}</a-radio>
         <a-radio :value="TYPE.RANGE">
-            从
+            {{ label.range[0] }}
             <input-number
                 v-model="range[0]"
                 :range="[...rangeStart]"
                 :field-value="field.value"
+                :locale="locale"
                 @change="onRangeStartChange"
             />
-            {{ isWeekField ? '' : field.label }}到
+            {{ label.range[1] }}
             <input-number
                 v-model="range[1]"
                 :range="[...rangeEnd]"
                 :field-value="field.value"
+                :locale="locale"
             />
-            {{ isWeekField ? '' : field.label }}
+            {{ label.range[2] }}
         </a-radio>
         <a-radio :value="TYPE.STEP" v-if="isStep">
-            从
+            {{ label.step[0] }}
             <input-number
                 v-model="step[0]"
                 :range="[...stepLeft]"
             />
-            {{ field.label }}开始，每
+            {{ label.step[1] }}
             <input-number
                 v-model="step[1]"
                 :range="[...stepRight]"
             />
-            {{ field.alias }}执行一次
+            {{ label.step[2] }}
         </a-radio>
         <a-radio :value="TYPE.WELL" v-if="isWell">
-            当月第
+            {{ label.well[0] }}
             <input-number
                 v-model="well[1]"
                 :range="[...wellLeft]"
             />
-            个
+            {{ label.well[1] }}
             <input-number
                 v-model="well[0]"
                 :range="[...wellRight]"
                 :field-value="field.value"
+                :locale="locale"
             />
         </a-radio>
         <a-radio :value="TYPE.WEEKDAY" v-if="isWeekday">
-            离当月
+            {{ label.weekday[0] }}
             <input-number
                 v-model="weekday"
                 :range="[...rangeStart]"
             />
-            号最近的那个工作日
+            {{ label.weekday[1] }}
         </a-radio>
-        <a-radio :value="TYPE.LAST_WEEKDAY" v-if="isLastWeekday">当月最后一个工作日</a-radio>
-        <a-radio :value="TYPE.LAST_DAY" v-if="isLastDayOfDate">当月最后一天</a-radio>
+        <a-radio :value="TYPE.LAST_WEEKDAY" v-if="isLastWeekday">{{ label.lastWeekday }}</a-radio>
+        <a-radio :value="TYPE.LAST_DAY" v-if="isLastDayOfDate">{{ label.lastDayOfDate }}</a-radio>
         <a-radio :value="TYPE.LAST_DAY" v-if="isLastDayOfWeek">
-            当月最后一个
+            {{ label.lastDayOfWeek }}
             <input-number
                 v-model="lastDayOfWeek"
                 :range="[0, 6]"
                 :field-value="field.value"
+                :locale="locale"
             />
         </a-radio>
         <a-radio :value="TYPE.SPECIFY">
-            <div>指定</div>
+            <div>{{ label.specify }}</div>
             <a-checkbox-group
+                :class="{ 'checkbox-group-en-week': isEnWeek }"
                 v-model:value="specify"
                 :options="specifies"
                 @change="onCheckboxGroupChange"
@@ -75,8 +80,10 @@
 </template>
 
 <script>
-import { DATE, WEEK, YEAR, WEEKS, TYPE } from '@/shared/constants.ts';
+import { DATE, WEEK, YEAR, TYPE, DEFAULT_LOCALE, LOCALE_EN } from '@/shared/constants.ts';
 import { generateSpecifies, weekLetterToNumber } from '@/shared/utils.ts';
+
+import I18n from '@/i18n';
 
 import InputNumber from './InputNumber.vue';
 
@@ -89,15 +96,20 @@ export default {
         field: {
             value: String,
             label: String,
-            alias: String,
             min: Number,
             max: Number,
+        },
+        locale: {
+            type: String,
+            default: DEFAULT_LOCALE,
         },
     },
     emits: ['update:modelValue'],
     data() {
         const { min, max, value } = this.field;
-        const specifies = (value === WEEK) ? WEEKS : generateSpecifies(min, max);
+
+        const labels = I18n[this.locale][value] ? Object.values(I18n[this.locale][value]) : null;
+        const specifies = generateSpecifies(min, max, labels);
 
         let wellLeft, wellRight;
 
@@ -124,11 +136,36 @@ export default {
         };
     },
     computed: {
+        label() {
+            const { type, fieldAlias } = I18n[this.locale];
+
+            return {
+                empty: type.empty,
+                every: `${type.every}${fieldAlias[this.field.value]}`,
+                unspecific: type.unspecific,
+                range: [
+                    type.range[0],
+                    ((this.field.value === WEEK || this.locale === LOCALE_EN) ? '' : this.field.label) + type.range[1],
+                    (this.field.value === WEEK || this.locale === LOCALE_EN) ? '' : this.field.label,
+                ],
+                step: [
+                    type.step[0],
+                    this.field.label + type.step[1],
+                    fieldAlias[this.field.value] + type.step[2],
+                ],
+                well: type.well,
+                weekday: type.weekday,
+                lastWeekday: type.lastWeekday,
+                lastDayOfDate: type.lastDayOfDate,
+                lastDayOfWeek: type.lastDayOfWeek,
+                specify: type.specify,
+            };
+        },
+        isEnWeek() {
+            return this.field.value === WEEK && this.locale === LOCALE_EN;
+        },
         rangeEnd() {
             return [this.range[0] + 1, this.field.max];
-        },
-        isWeekField() {
-            return this.field.value === WEEK;
         },
         isEmpty() {
             return this.field.value === YEAR;
@@ -184,7 +221,7 @@ export default {
                 let value = modelValue;
 
                 if (this.field.value === WEEK) {
-                    value = weekLetterToNumber(value);
+                    value = weekLetterToNumber(value).replaceAll('7', '0');
                 }
 
                 if ([TYPE.EMPTY, TYPE.UNSPECIFIC, TYPE.LAST_DAY, TYPE.LAST_WEEKDAY, TYPE.EVERY].includes(value)) {

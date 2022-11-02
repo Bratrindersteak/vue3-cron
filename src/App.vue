@@ -1,30 +1,24 @@
 <template>
     <div class="wrapper">
-        <Cron v-model="expression" />
+        <Cron v-model="expression" :locale="locale" />
     </div>
 </template>
 
-<script lang="ts">
-import Cron from '@/components/Cron.vue';
+<script setup lang="ts">
+import { ref, watchEffect } from 'vue';
 
-export default {
-    components: {
-        Cron,
-    },
-    data() {
-        return {
-            expression: '0 0 0 ? * 5',
-        };
-    },
-    watch: {
-        expression: {
-            handler(value) {
-                console.log('App watch expression: ', value);
-            },
-            immediate: true,
-        },
-    },
-}
+import Cron from './index.ts';
+
+const expression = ref('0 0 0 ? * 7L');
+const locale = ref('cn');
+
+watchEffect(() => {
+    console.log('App watchEffect expression: ', expression.value);
+});
+
+watchEffect(() => {
+    console.log('App watchEffect locale: ', locale.value);
+});
 </script>
 
 <style scoped>

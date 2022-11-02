@@ -1,19 +1,19 @@
 <template>
-    <div class="cron-wrapper">
+    <div class="cron-wrapper" :style="{ width }">
         <a-tabs class="cron-tabs" v-model:activeKey="activeKey" :tabBarGutter="-1" type="card">
             <a-tab-pane v-for="field in fields" :tab="field.label" :key="field.value">
-                <CronBase v-model="cron[field.value]" :field="field" />
+                <CronBase v-model="cron[field.value]" :field="field" :locale="locale" />
             </a-tab-pane>
         </a-tabs>
         <div class="expression">
             <div class="title">
-                <span class="label">完整表达式</span>
+                <span class="label">{{ expressionLabel }}</span>
             </div>
             <span class="content">{{ expression }}</span>
         </div>
         <div class="preview">
             <div class="title">
-                <span class="label">最近{{ previewTime }}次运行时间</span>
+                <span class="label">{{ previewLabel }}</span>
             </div>
             <ul class="list">
                 <li v-for="preview in previews" :key="preview">{{ preview }}</li>
@@ -25,8 +25,10 @@
 <script lang="ts">
 import cronParser from 'cron-parser';
 
-import { FIELDS, TYPE, DEFAULT_CRON_EXPRESSION } from '@/shared/constants.ts';
+import { FIELDS, TYPE, DEFAULT_CRON_EXPRESSION, DEFAULT_LOCALE, LOCALE_CN } from '@/shared/constants.ts';
 import { zerofill, weekNumberToLetter } from '@/shared/utils.ts';
+
+import I18n from '@/i18n';
 
 import CronBase from './_Internal/CronBase.vue';
 
@@ -40,6 +42,10 @@ export default {
             type: String,
             default: DEFAULT_CRON_EXPRESSION,
         },
+        locale: {
+            type: String,
+            default: DEFAULT_LOCALE,
+        },
     },
     emits: ['update:modelValue'],
     data() {
@@ -47,12 +53,27 @@ export default {
 
         return {
             activeKey: FIELDS[0].value,
-            fields: FIELDS,
             cron: { second, minute, hour, date, month, week, year },
             previewTime: 5,
         };
     },
     computed: {
+        width() {
+            return (this.locale === LOCALE_CN) ? '438px' : '496px';
+        },
+        fields() {
+            return FIELDS.map(field => {
+                const label = I18n[this.locale].field[field.value];
+
+                return { ...field, label };
+            });
+        },
+        expressionLabel() {
+            return I18n[this.locale].expression;
+        },
+        previewLabel() {
+            return I18n[this.locale].preview.join(this.previewTime);
+        },
         expression() {
             return Object.values(this.cron).join(' ');
         },
@@ -120,10 +141,6 @@ export default {
 </script>
 
 <style>
-.cron-wrapper {
-    width: 438px;
-}
-
 .cron-tabs {
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 3px;
@@ -145,6 +162,10 @@ export default {
 
 .cron-tabs .ant-checkbox-wrapper.ant-checkbox-group-item {
     min-width: 47px;
+}
+
+.checkbox-group-en-week .ant-checkbox-wrapper.ant-checkbox-group-item {
+    min-width: 88px;
 }
 </style>
 
