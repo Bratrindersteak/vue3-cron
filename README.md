@@ -62,7 +62,7 @@ app.mount('#app');
 
 ```vue
 <template>
-    <vue3-cron v-model="expression" />
+    <vue3-cron v-model="expression" :locale="locale" />
 </template>
 
 <script>
@@ -70,6 +70,7 @@ app.mount('#app');
         data() {
             return {
                 expression: '* * * * * ?',
+                locale: 'cn', // set 'cn' or 'en'.
             };
         },
     }

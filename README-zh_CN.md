@@ -62,16 +62,17 @@ app.mount('#app');
 
 ```vue
 <template>
-    <vue3-cron v-model="expression" />
+    <vue3-cron v-model="expression" :locale="locale" />
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                expression: '* * * * * ?',
-            };
-        },
-    }
+export default {
+    data() {
+        return {
+            expression: '* * * * * ?',
+            locale: 'cn', // 设置 'cn' 或者 'en'.
+        };
+    },
+}
 </script>
 ```
