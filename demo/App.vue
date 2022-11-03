@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 
-import Cron from './index.ts';
+import Cron from '../src';
 
 const expression = ref('* * * * * ?');
 const locale = ref('en');
