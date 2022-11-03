@@ -9,8 +9,8 @@ import { ref, watchEffect } from 'vue';
 
 import Cron from './index.ts';
 
-const expression = ref('0 0 0 ? * 7L');
-const locale = ref('cn');
+const expression = ref('* * * * * ?');
+const locale = ref('en');
 
 watchEffect(() => {
     console.log('App watchEffect expression: ', expression.value);

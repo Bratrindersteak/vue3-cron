@@ -18,8 +18,8 @@
   "author": "Bratrindersteak",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue3-cron.cjs",
-  "module": "dist/vue3-cron.js",
+  "main": "dist/vue3-cron-antd.cjs",
+  "module": "dist/vue3-cron-antd.js",
   "repository": {
     "type": "git",
     "url": "git@github.com:Bratrindersteak/vue3-cron.git"

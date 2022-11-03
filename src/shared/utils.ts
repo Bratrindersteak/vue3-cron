@@ -54,7 +54,7 @@ export function weekLetterToNumber(value: string): string {
  * 星期字段的 <a-input-number> 组件 formatter 函数.
  *
  * @param value - .
- * @param locale - .
+ * @param locale - 国际化字段.
  */
 export function formatterWeek(value: string, locale: string): string {
     const day = WEEKS.find(({ index }) => index === value)?.value;
@@ -66,7 +66,7 @@ export function formatterWeek(value: string, locale: string): string {
  * 星期字段的 <a-input-number> 组件 parser 函数.
  *
  * @param value - .
- * @param locale - .
+ * @param locale - 国际化字段.
  */
 export function parserWeek(value: string, locale: string): number {
     const [key] = Object.entries(I18n[locale][WEEK]).find(([, val]) => val === value);

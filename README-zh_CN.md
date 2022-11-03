@@ -6,7 +6,7 @@
 
 ## 预览
 
-![](public/preview.png)
+![](public/preview-cn.png)
 
 ## 支持的语法
 
@@ -70,7 +70,7 @@ export default {
     data() {
         return {
             expression: '* * * * * ?',
-            locale: 'cn', // 设置 'cn' 或者 'en'.
+            locale: 'cn', // 设置 'cn' 或者 'en'，默认值为 'cn'.
         };
     },
 }

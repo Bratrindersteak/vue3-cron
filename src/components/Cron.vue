@@ -59,7 +59,7 @@ export default {
     },
     computed: {
         width() {
-            return (this.locale === LOCALE_CN) ? '438px' : '496px';
+            return (this.locale === LOCALE_CN) ? '438px' : '516px';
         },
         fields() {
             return FIELDS.map(field => {

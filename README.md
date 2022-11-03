@@ -6,7 +6,7 @@ English | [简体中文](./README-zh_CN.md)
 
 ## Preview
 
-![](public/preview.png)
+![](public/preview-en.png)
 
 ## Supported format
 
@@ -70,7 +70,7 @@ app.mount('#app');
         data() {
             return {
                 expression: '* * * * * ?',
-                locale: 'cn', // set 'cn' or 'en'.
+                locale: 'cn', // set 'cn' or 'en', default is 'cn'.
             };
         },
     }
