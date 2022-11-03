@@ -1,6 +1,6 @@
 {
   "name": "vue3-cron-antd",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Cron expression UI component based on Vue3 and Ant Design Vue",
   "keywords": [
     "vue3-cron",
