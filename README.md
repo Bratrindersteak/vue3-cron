@@ -43,6 +43,7 @@ npm install vue3-cron-antd --save
 ### Import
 
 ```typescript
+// Global import.
 import { createApp } from 'vue';
 import AntDesignVue from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
@@ -56,6 +57,18 @@ app.use(AntDesignVue);
 app.use(Vue3Cron);
 
 app.mount('#app');
+```
+or
+```vue
+<script>
+import Vue3Cron from 'vue3-cron-antd';
+// Single import.
+export default {
+    components: {
+        Vue3Cron,
+    },
+}
+</script>
 ```
 
 ### Use

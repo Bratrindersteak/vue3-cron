@@ -43,6 +43,7 @@ npm install vue3-cron-antd --save
 ### 引入
 
 ```typescript
+// 全局引入.
 import { createApp } from 'vue';
 import AntDesignVue from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
@@ -56,6 +57,18 @@ app.use(AntDesignVue);
 app.use(Vue3Cron);
 
 app.mount('#app');
+```
+或者
+```vue
+<script>
+import Vue3Cron from 'vue3-cron-antd';
+// 单独引入.
+export default {
+    components: {
+        Vue3Cron,
+    },
+}
+</script>
 ```
 
 ### 使用
